@@ -59,7 +59,7 @@ class SB_Slider_Shortcode {
          */
         ?>
 <style id="sb-slider-critical">
-.sb-slider-root{position:relative;width:100%;height:100vh;overflow:hidden;background:#000;--sb-header-offset:0px}
+.sb-slider-root{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#000;--sb-header-offset:0px}
 .sb-slider-root:not(.sb-ready) .sb-slide,
 .sb-slider-root:not(.sb-ready) .sb-slider-arrow,
 .sb-slider-root:not(.sb-ready) .sb-slider-nav{opacity:0!important;pointer-events:none!important}

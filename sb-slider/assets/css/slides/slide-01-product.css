@@ -222,8 +222,17 @@
         font-size: 14px;
     }
 
+    .sb-slider-root .sb-slide-1 .sb-product-container {
+        order: -1;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-content-wrapper {
+        gap: 25px;
+    }
+
     .sb-slider-root .sb-slide-1 .sb-product-image {
         width: 350px;
+        max-width: 100%;
     }
 }
 
@@ -259,6 +268,10 @@
 
     .sb-slider-root .sb-slide-1 .sb-product-image {
         width: 280px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-content-wrapper {
+        gap: 15px;
     }
 
     .sb-slider-root .sb-slide-1 .sb-floating-element {

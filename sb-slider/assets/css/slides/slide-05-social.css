@@ -201,6 +201,19 @@
         max-width: 280px;
     }
 
+    .sb-slider-root .sb-slide-5 .sb-visual-side {
+        order: -1;
+        height: auto;
+    }
+
+    .sb-slider-root .sb-slide-5 .sb-text-side {
+        text-align: center;
+    }
+
+    .sb-slider-root .sb-slide-5 .sb-social-icons {
+        justify-content: center;
+    }
+
     .sb-slider-root .sb-slide-5 .sb-social-icon {
         width: 50px;
         height: 50px;
@@ -228,6 +241,10 @@
 
     .sb-slider-root .sb-slide-5 .sb-social-icons {
         gap: 15px;
+    }
+
+    .sb-slider-root .sb-slide-5 .sb-visual-side {
+        height: auto;
     }
 
     .sb-slider-root .sb-slide-5 .sb-social-icon {

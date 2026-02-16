@@ -111,6 +111,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
+    height: 100dvh;    /* Modern browsers: excludes mobile address bar */
     overflow: hidden;
     font-family: 'Arial', sans-serif;
     font-size: 16px;
