@@ -37,7 +37,7 @@ LWMHeroSlider.initSlide3Animations = function (root) {
         for (var ci = 0; ci < text.length; ci++) {
             var span = document.createElement('span');
             span.className = 'lwm-hero-letter';
-            span.textContent = text[ci];
+            span.textContent = text[ci] === ' ' ? '\u00A0' : text[ci];
             span.style.animationDelay = (startDelay + letterIdx * letterStagger) + 's';
             line.appendChild(span);
             letterIdx++;
@@ -53,7 +53,7 @@ LWMHeroSlider.initSlide3Animations = function (root) {
             dSpan.style.display   = 'inline-block';
             dSpan.style.opacity   = '0';
             dSpan.style.filter    = 'blur(20px)';
-            dSpan.textContent     = descText[di];
+            dSpan.textContent     = descText[di] === ' ' ? '\u00A0' : descText[di];
             dSpan.style.animation =
                 'lwm-hero-letterFocusIn 0.9s cubic-bezier(0.165, 0.84, 0.44, 1) ' +
                 (startDelay + di * letterStagger) + 's forwards';
