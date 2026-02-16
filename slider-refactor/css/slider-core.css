@@ -28,6 +28,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* --- Slides Container (needed for slides with position: relative, e.g. slide 6) --- */
+.sb-slider-root #sb-slides-container {
+    position: absolute;
+    inset: 0;
+}
+
 /* --- Slide Base --- */
 .sb-slider-root .sb-slide {
     position: absolute;
