@@ -126,14 +126,24 @@
     z-index: 2;
 }
 
-.sb-slider-root .sb-slide-5.sb-active .sb-phone-mockup {
+/* First activation: slide-in plays once (only before entrance completes) */
+.sb-slider-root .sb-slide-5.sb-active .sb-phone-mockup:not(.sb-entered) {
     animation: sb-slideInPhone 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s forwards;
 }
 
-/* Levitation after slide-in completes */
-.sb-slider-root .sb-slide-5.sb-active .sb-phone-mockup.sb-loaded {
-    animation: sb-slideInPhone 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s forwards,
-               sb-levitate 3s ease-in-out 1.7s infinite;
+/* After first entrance: levitation always declared, play-state controls start/stop.
+ * animation-play-state: paused keeps the animation at its current position
+ * without restarting — toggling to running resumes from that exact frame. */
+.sb-slider-root .sb-slide-5 .sb-phone-mockup.sb-entered {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: sb-levitate 3s ease-in-out infinite;
+    animation-play-state: paused;
+    will-change: transform;
+}
+
+.sb-slider-root .sb-slide-5.sb-active .sb-phone-mockup.sb-entered {
+    animation-play-state: running;
 }
 
 /* --- Slide-specific Keyframes --- */

@@ -160,13 +160,20 @@
                     }
                 }
 
-                /* Phone levitation on slide 5 (index 4) */
+                /* Phone levitation on slide 5 (index 4) —
+                 * Listen for slide-in animation end, then switch to levitation.
+                 * On return visits .sb-entered is already set → CSS handles
+                 * instant resume via animation-play-state. */
                 if (index === 4) {
                     var phone = root.querySelector('.sb-phone-mockup');
-                    if (phone) {
-                        setTimeout(function () {
-                            phone.classList.add('sb-loaded');
-                        }, 1700);
+                    if (phone && !phone.classList.contains('sb-entered') && !phone._sbListening) {
+                        phone._sbListening = true;
+                        phone.addEventListener('animationend', function handler(e) {
+                            if (e.animationName === 'sb-slideInPhone') {
+                                phone.removeEventListener('animationend', handler);
+                                phone.classList.add('sb-entered');
+                            }
+                        });
                     }
                 }
 
