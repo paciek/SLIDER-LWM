@@ -129,7 +129,8 @@
     width: 700px;
     height: auto;
     display: block;
-    transition: transform 0.1s ease-out;
+    will-change: transform;
+    backface-visibility: hidden;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
 }
 

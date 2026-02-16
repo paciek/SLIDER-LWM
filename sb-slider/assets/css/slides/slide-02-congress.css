@@ -27,7 +27,8 @@
     text-align: center;
     color: #fff;
     margin-top: -15vh;
-    transition: transform 0.1s ease-out;
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .sb-slider-root .sb-slide-2 .sb-congress-label {
@@ -83,7 +84,8 @@
     height: 55vh;
     width: auto;
     display: block;
-    transition: transform 0.1s ease-out;
+    will-change: transform;
+    backface-visibility: hidden;
     filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.6));
     z-index: 3;
 }
