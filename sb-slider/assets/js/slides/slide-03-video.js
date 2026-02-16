@@ -6,13 +6,13 @@
 
 /* The animation function is called from showSlide() in core
    when the user first navigates to slide 3. */
-SBSlider.initSlide3Animations = function (root) {
-    var slide3 = root.querySelector('.sb-slide-3');
+LWMHeroSlider.initSlide3Animations = function (root) {
+    var slide3 = root.querySelector('.lwm-hero-slide-3');
     if (!slide3) return;
 
-    var titleLines  = slide3.querySelectorAll('.sb-video-title .sb-line');
-    var description = slide3.querySelector('.sb-video-description');
-    var button      = slide3.querySelector('.sb-video-cta');
+    var titleLines  = slide3.querySelectorAll('.lwm-hero-video-title .lwm-hero-line');
+    var description = slide3.querySelector('.lwm-hero-video-description');
+    var button      = slide3.querySelector('.lwm-hero-video-cta');
 
     var startDelay    = 0.2;   // seconds
     var letterStagger = 0.04;  // 40 ms between letters
@@ -36,7 +36,7 @@ SBSlider.initSlide3Animations = function (root) {
 
         for (var ci = 0; ci < text.length; ci++) {
             var span = document.createElement('span');
-            span.className = 'sb-letter';
+            span.className = 'lwm-hero-letter';
             span.textContent = text[ci];
             span.style.animationDelay = (startDelay + letterIdx * letterStagger) + 's';
             line.appendChild(span);
@@ -55,7 +55,7 @@ SBSlider.initSlide3Animations = function (root) {
             dSpan.style.filter    = 'blur(20px)';
             dSpan.textContent     = descText[di];
             dSpan.style.animation =
-                'sb-letterFocusIn 0.9s cubic-bezier(0.165, 0.84, 0.44, 1) ' +
+                'lwm-hero-letterFocusIn 0.9s cubic-bezier(0.165, 0.84, 0.44, 1) ' +
                 (startDelay + di * letterStagger) + 's forwards';
             description.appendChild(dSpan);
         }
@@ -69,15 +69,15 @@ SBSlider.initSlide3Animations = function (root) {
     }
 
     /* Start CSS animations */
-    slide3.classList.add('sb-first-time-active');
+    slide3.classList.add('lwm-hero-first-time-active');
 
     /* After all animations finish → lock visible state */
     var maxL        = Math.max(totalTitleLetters, totalDescLetters);
     var totalAnimMs = (startDelay + maxL * letterStagger + 0.9) * 1000;
 
     setTimeout(function () {
-        slide3.classList.remove('sb-first-time-active');
-        slide3.classList.add('sb-animation-completed');
+        slide3.classList.remove('lwm-hero-first-time-active');
+        slide3.classList.add('lwm-hero-animation-completed');
     }, totalAnimMs);
 };
 
@@ -85,7 +85,7 @@ SBSlider.initSlide3Animations = function (root) {
  * Video has preload="auto"; the animation itself doesn't
  * start until showSlide navigates here, so the slide
  * is ready as soon as DOM is parsed.                       */
-SBSlider.registerSlideInit(function (root) {
-    SBSlider.claimSlide(root, 2);
-    SBSlider.markSlideReady(root, 2);
+LWMHeroSlider.registerSlideInit(function (root) {
+    LWMHeroSlider.claimSlide(root, 2);
+    LWMHeroSlider.markSlideReady(root, 2);
 });

@@ -3,7 +3,7 @@
    Europejski Kongres Przedsiębiorców
    ============================================ */
 
-.sb-slider-root .sb-slide-2 {
+.lwm-hero-slider-root .lwm-hero-slide-2 {
     background-image: url('https://lekcjewartemiliony.pl/wp-content/uploads/2025/05/kongres-bg.jpg');
     background-size: cover;
     background-position: center;
@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.sb-slider-root .sb-slide-2::before {
+.lwm-hero-slider-root .lwm-hero-slide-2::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -21,7 +21,7 @@
 }
 
 /* --- Content Layer --- */
-.sb-slider-root .sb-slide-2 .sb-content-layer {
+.lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-content-layer {
     position: relative;
     z-index: 2;
     text-align: center;
@@ -31,7 +31,7 @@
     backface-visibility: hidden;
 }
 
-.sb-slider-root .sb-slide-2 .sb-congress-label {
+.lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-congress-label {
     font-family: 'Arial', sans-serif;
     font-size: 20px;
     font-weight: 800;
@@ -42,7 +42,7 @@
     margin-bottom: 30px;
 }
 
-.sb-slider-root .sb-slide-2 h2 {
+.lwm-hero-slider-root .lwm-hero-slide-2 h2 {
     font-family: 'Arial', sans-serif;
     font-size: 64px;
     font-weight: 900;
@@ -55,7 +55,7 @@
 }
 
 /* --- CTA Section (bottom) --- */
-.sb-slider-root .sb-slide-2 .sb-cta-section {
+.lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-cta-section {
     position: absolute;
     bottom: 15%;
     left: 50%;
@@ -67,7 +67,7 @@
     z-index: 4;
 }
 
-.sb-slider-root .sb-slide-2 .sb-early-bird {
+.lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-early-bird {
     font-family: 'Arial', sans-serif;
     font-size: 16px;
     line-height: 1.4;
@@ -76,7 +76,7 @@
 }
 
 /* --- Character Image --- */
-.sb-slider-root .sb-slide-2 .sb-character-image {
+.lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-character-image {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -92,56 +92,56 @@
 
 /* --- Responsive --- */
 @media (max-width: 1024px) {
-    .sb-slider-root .sb-slide-2 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-2 h2 {
         font-size: 52px;
     }
 
-    .sb-slider-root .sb-slide-2 .sb-character-image {
+    .lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-character-image {
         height: 45vh;
     }
 }
 
 @media (max-width: 768px) {
-    .sb-slider-root .sb-slide-2 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-2 h2 {
         font-size: 40px;
     }
 
-    .sb-slider-root .sb-slide-2 .sb-congress-label {
+    .lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-congress-label {
         font-size: 16px;
         letter-spacing: 6px;
     }
 
-    .sb-slider-root .sb-slide-2 .sb-character-image {
+    .lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-character-image {
         height: 40vh;
     }
 
-    .sb-slider-root .sb-slide-2 .sb-early-bird {
+    .lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-early-bird {
         font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
-    .sb-slider-root .sb-slide-2 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-2 h2 {
         font-size: 32px;
     }
 
-    .sb-slider-root .sb-slide-2 .sb-congress-label {
+    .lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-congress-label {
         font-size: 12px;
         letter-spacing: 4px;
         margin-bottom: 20px;
     }
 
-    .sb-slider-root .sb-slide-2 .sb-character-image {
+    .lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-character-image {
         height: 35vh;
     }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
-    .sb-slider-root .sb-slide-2 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-2 h2 {
         font-size: 28px;
     }
 
-    .sb-slider-root .sb-slide-2 .sb-character-image {
+    .lwm-hero-slider-root .lwm-hero-slide-2 .lwm-hero-character-image {
         height: 70vh;
     }
 }

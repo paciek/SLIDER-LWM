@@ -3,7 +3,7 @@
    Dołącz do społeczności
    ============================================ */
 
-.sb-slider-root .sb-slide-5 {
+.lwm-hero-slider-root .lwm-hero-slide-5 {
     background: #373737;
     display: flex;
     align-items: center;
@@ -13,7 +13,7 @@
 }
 
 /* --- Content Layout --- */
-.sb-slider-root .sb-slide-5 .sb-content-layout {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-content-layout {
     position: relative;
     z-index: 2;
     display: flex;
@@ -26,13 +26,13 @@
 }
 
 /* --- Text Side --- */
-.sb-slider-root .sb-slide-5 .sb-text-side {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-text-side {
     flex: 1;
     max-width: 600px;
     color: #fff;
 }
 
-.sb-slider-root .sb-slide-5 h2 {
+.lwm-hero-slider-root .lwm-hero-slide-5 h2 {
     font-family: 'Arial', sans-serif;
     font-size: 68px;
     font-weight: 900;
@@ -44,11 +44,11 @@
     transform: translateX(-60px);
 }
 
-.sb-slider-root .sb-slide-5.sb-active h2 {
-    animation: sb-slideInFromLeft 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s forwards;
+.lwm-hero-slider-root .lwm-hero-slide-5.lwm-hero-active h2 {
+    animation: lwm-hero-slideInFromLeft 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s forwards;
 }
 
-.sb-slider-root .sb-slide-5 .sb-social-description {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-description {
     font-family: 'Arial', sans-serif;
     font-size: 22px;
     font-weight: 300;
@@ -59,23 +59,23 @@
     transform: translateX(-60px);
 }
 
-.sb-slider-root .sb-slide-5.sb-active .sb-social-description {
-    animation: sb-slideInFromLeft 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s forwards;
+.lwm-hero-slider-root .lwm-hero-slide-5.lwm-hero-active .lwm-hero-social-description {
+    animation: lwm-hero-slideInFromLeft 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s forwards;
 }
 
 /* --- Social Icons --- */
-.sb-slider-root .sb-slide-5 .sb-social-icons {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-icons {
     display: flex;
     gap: 20px;
     opacity: 0;
     transform: translateX(-60px);
 }
 
-.sb-slider-root .sb-slide-5.sb-active .sb-social-icons {
-    animation: sb-slideInFromLeft 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.7s forwards;
+.lwm-hero-slider-root .lwm-hero-slide-5.lwm-hero-active .lwm-hero-social-icons {
+    animation: lwm-hero-slideInFromLeft 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.7s forwards;
 }
 
-.sb-slider-root .sb-slide-5 .sb-social-icon {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-icon {
     width: 60px;
     height: 60px;
     background: rgba(255, 255, 255, 0.1);
@@ -91,13 +91,13 @@
     backdrop-filter: blur(10px);
 }
 
-.sb-slider-root .sb-slide-5 .sb-social-icon svg {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-icon svg {
     fill: currentColor;
     width: 24px;
     height: 24px;
 }
 
-.sb-slider-root .sb-slide-5 .sb-social-icon:hover {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-icon:hover {
     background: linear-gradient(135deg, #ca9c57 0%, #dab578 100%);
     border-color: #ca9c57;
     transform: translateY(-5px);
@@ -105,7 +105,7 @@
 }
 
 /* --- Visual Side --- */
-.sb-slider-root .sb-slide-5 .sb-visual-side {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-visual-side {
     flex: 1;
     position: relative;
     height: 600px;
@@ -115,7 +115,7 @@
 }
 
 /* --- Phone Mockup --- */
-.sb-slider-root .sb-slide-5 .sb-phone-mockup {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-phone-mockup {
     max-width: 425px;
     max-height: 800px;
     width: auto;
@@ -127,27 +127,27 @@
 }
 
 /* First activation: slide-in plays once (only before entrance completes) */
-.sb-slider-root .sb-slide-5.sb-active .sb-phone-mockup:not(.sb-entered) {
-    animation: sb-slideInPhone 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s forwards;
+.lwm-hero-slider-root .lwm-hero-slide-5.lwm-hero-active .lwm-hero-phone-mockup:not(.lwm-hero-entered) {
+    animation: lwm-hero-slideInPhone 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s forwards;
 }
 
 /* After first entrance: levitation always declared, play-state controls start/stop.
  * animation-play-state: paused keeps the animation at its current position
  * without restarting — toggling to running resumes from that exact frame. */
-.sb-slider-root .sb-slide-5 .sb-phone-mockup.sb-entered {
+.lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-phone-mockup.lwm-hero-entered {
     opacity: 1;
     transform: translateY(0) scale(1);
-    animation: sb-levitate 3s ease-in-out infinite;
+    animation: lwm-hero-levitate 3s ease-in-out infinite;
     animation-play-state: paused;
     will-change: transform;
 }
 
-.sb-slider-root .sb-slide-5.sb-active .sb-phone-mockup.sb-entered {
+.lwm-hero-slider-root .lwm-hero-slide-5.lwm-hero-active .lwm-hero-phone-mockup.lwm-hero-entered {
     animation-play-state: running;
 }
 
 /* --- Slide-specific Keyframes --- */
-@keyframes sb-slideInPhone {
+@keyframes lwm-hero-slideInPhone {
     from {
         opacity: 0;
         transform: translateY(100px) scale(0.9);
@@ -158,7 +158,7 @@
     }
 }
 
-@keyframes sb-levitate {
+@keyframes lwm-hero-levitate {
     0%, 100% {
         transform: translateY(0) scale(1);
     }
@@ -169,52 +169,52 @@
 
 /* --- Responsive --- */
 @media (max-width: 1024px) {
-    .sb-slider-root .sb-slide-5 .sb-content-layout {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-content-layout {
         flex-direction: column;
         gap: 40px;
         padding: 0 50px;
     }
 
-    .sb-slider-root .sb-slide-5 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-5 h2 {
         font-size: 52px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-phone-mockup {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-phone-mockup {
         max-width: 350px;
     }
 }
 
 @media (max-width: 768px) {
-    .sb-slider-root .sb-slide-5 .sb-content-layout {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-content-layout {
         padding: 0 30px;
     }
 
-    .sb-slider-root .sb-slide-5 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-5 h2 {
         font-size: 40px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-social-description {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-description {
         font-size: 18px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-phone-mockup {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-phone-mockup {
         max-width: 280px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-visual-side {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-visual-side {
         order: -1;
         height: auto;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-text-side {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-text-side {
         text-align: center;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-social-icons {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-icons {
         justify-content: center;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-social-icon {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-icon {
         width: 50px;
         height: 50px;
         font-size: 20px;
@@ -222,32 +222,32 @@
 }
 
 @media (max-width: 480px) {
-    .sb-slider-root .sb-slide-5 .sb-content-layout {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-content-layout {
         padding: 0 20px;
         gap: 30px;
     }
 
-    .sb-slider-root .sb-slide-5 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-5 h2 {
         font-size: 32px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-social-description {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-description {
         font-size: 16px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-phone-mockup {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-phone-mockup {
         max-width: 240px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-social-icons {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-icons {
         gap: 15px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-visual-side {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-visual-side {
         height: auto;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-social-icon {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-social-icon {
         width: 45px;
         height: 45px;
         font-size: 18px;
@@ -255,11 +255,11 @@
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
-    .sb-slider-root .sb-slide-5 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-5 h2 {
         font-size: 28px;
     }
 
-    .sb-slider-root .sb-slide-5 .sb-phone-mockup {
+    .lwm-hero-slider-root .lwm-hero-slide-5 .lwm-hero-phone-mockup {
         max-width: 200px;
     }
 }

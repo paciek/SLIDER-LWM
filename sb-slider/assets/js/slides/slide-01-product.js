@@ -7,18 +7,18 @@
  *   RAF loop   → lerp interpolation  → single transform3d write
  *   Result: 60 fps, buttery smooth, zero layout thrashing
  */
-SBSlider.registerSlideInit(function (root) {
-    var slide1       = root.querySelector('.sb-slide-1');
-    var productImage = root.querySelector('.sb-product-image');
+LWMHeroSlider.registerSlideInit(function (root) {
+    var slide1       = root.querySelector('.lwm-hero-slide-1');
+    var productImage = root.querySelector('.lwm-hero-product-image');
 
     if (!slide1 || !productImage) return;
 
     /* Claim slide 0 — we handle readiness ourselves */
-    SBSlider.claimSlide(root, 0);
+    LWMHeroSlider.claimSlide(root, 0);
 
     /* Mark ready once the product image has loaded */
     function onImageReady() {
-        SBSlider.markSlideReady(root, 0);
+        LWMHeroSlider.markSlideReady(root, 0);
     }
 
     if (productImage.complete && productImage.naturalWidth > 0) {
@@ -130,14 +130,14 @@ SBSlider.registerSlideInit(function (root) {
     }
 
     var observer = new MutationObserver(function () {
-        var nowActive = slide1.classList.contains('sb-active');
+        var nowActive = slide1.classList.contains('lwm-hero-active');
         if (nowActive && !isActive)  onActivate();
         else if (!nowActive && isActive) onDeactivate();
     });
     observer.observe(slide1, { attributes: true, attributeFilter: ['class'] });
 
     /* Initial state */
-    if (slide1.classList.contains('sb-active')) onActivate();
+    if (slide1.classList.contains('lwm-hero-active')) onActivate();
 
     /* Recache dimensions on resize (debounced) */
     var resizeTimer;

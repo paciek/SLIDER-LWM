@@ -6,12 +6,12 @@
  * shortcode is present — either detected via has_shortcode() in the
  * main post, or flagged at render-time (fallback for page builders).
  *
- * @package SB_Slider
+ * @package LWM_Hero_Slider
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class SB_Slider_Assets {
+class LWM_Hero_Slider_Assets {
 
     /** @var bool Whether assets have already been enqueued. */
     private static $enqueued = false;
@@ -24,21 +24,21 @@ class SB_Slider_Assets {
     /* ─── Register (never enqueue yet) ─────────────────────── */
 
     public function register(): void {
-        $css_url  = SB_SLIDER_URL  . 'assets/css/';
-        $js_url   = SB_SLIDER_URL  . 'assets/js/';
-        $css_path = SB_SLIDER_PATH . 'assets/css/';
-        $js_path  = SB_SLIDER_PATH . 'assets/js/';
+        $css_url  = LWM_HERO_SLIDER_URL  . 'assets/css/';
+        $js_url   = LWM_HERO_SLIDER_URL  . 'assets/js/';
+        $css_path = LWM_HERO_SLIDER_PATH . 'assets/css/';
+        $js_path  = LWM_HERO_SLIDER_PATH . 'assets/js/';
 
         /* Core */
         wp_register_style(
-            'sb-slider-core',
+            'lwm-hero-slider-core',
             $css_url . 'slider-core.css',
             [],
             self::ver( $css_path . 'slider-core.css' )
         );
 
         wp_register_script(
-            'sb-slider-core',
+            'lwm-hero-slider-core',
             $js_url . 'slider-core.js',
             [],
             self::ver( $js_path . 'slider-core.js' ),
@@ -57,9 +57,9 @@ class SB_Slider_Assets {
 
         foreach ( $slide_css as $slug ) {
             wp_register_style(
-                "sb-slider-{$slug}",
+                "lwm-hero-slider-{$slug}",
                 "{$css_url}slides/{$slug}.css",
-                [ 'sb-slider-core' ],
+                [ 'lwm-hero-slider-core' ],
                 self::ver( "{$css_path}slides/{$slug}.css" )
             );
         }
@@ -74,9 +74,9 @@ class SB_Slider_Assets {
 
         foreach ( $slide_js as $slug ) {
             wp_register_script(
-                "sb-slider-{$slug}",
+                "lwm-hero-slider-{$slug}",
                 "{$js_url}slides/{$slug}.js",
-                [ 'sb-slider-core' ],
+                [ 'lwm-hero-slider-core' ],
                 self::ver( "{$js_path}slides/{$slug}.js" ),
                 true
             );
@@ -105,20 +105,20 @@ class SB_Slider_Assets {
         self::$enqueued = true;
 
         /* CSS */
-        wp_enqueue_style( 'sb-slider-core' );
-        wp_enqueue_style( 'sb-slider-slide-01-product' );
-        wp_enqueue_style( 'sb-slider-slide-02-congress' );
-        wp_enqueue_style( 'sb-slider-slide-03-video' );
-        wp_enqueue_style( 'sb-slider-slide-04-book' );
-        wp_enqueue_style( 'sb-slider-slide-05-social' );
-        wp_enqueue_style( 'sb-slider-slide-06-gate' );
+        wp_enqueue_style( 'lwm-hero-slider-core' );
+        wp_enqueue_style( 'lwm-hero-slider-slide-01-product' );
+        wp_enqueue_style( 'lwm-hero-slider-slide-02-congress' );
+        wp_enqueue_style( 'lwm-hero-slider-slide-03-video' );
+        wp_enqueue_style( 'lwm-hero-slider-slide-04-book' );
+        wp_enqueue_style( 'lwm-hero-slider-slide-05-social' );
+        wp_enqueue_style( 'lwm-hero-slider-slide-06-gate' );
 
         /* JS */
-        wp_enqueue_script( 'sb-slider-core' );
-        wp_enqueue_script( 'sb-slider-slide-01-product' );
-        wp_enqueue_script( 'sb-slider-slide-02-congress' );
-        wp_enqueue_script( 'sb-slider-slide-03-video' );
-        wp_enqueue_script( 'sb-slider-slide-06-gate' );
+        wp_enqueue_script( 'lwm-hero-slider-core' );
+        wp_enqueue_script( 'lwm-hero-slider-slide-01-product' );
+        wp_enqueue_script( 'lwm-hero-slider-slide-02-congress' );
+        wp_enqueue_script( 'lwm-hero-slider-slide-03-video' );
+        wp_enqueue_script( 'lwm-hero-slider-slide-06-gate' );
     }
 
     /* ─── Helpers ──────────────────────────────────────────── */
@@ -129,6 +129,6 @@ class SB_Slider_Assets {
     private static function ver( string $path ): string {
         return file_exists( $path )
             ? (string) filemtime( $path )
-            : SB_SLIDER_VERSION;
+            : LWM_HERO_SLIDER_VERSION;
     }
 }

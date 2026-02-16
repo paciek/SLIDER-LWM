@@ -1,21 +1,21 @@
 /**
- * SB Slider — Core Logic (production build)
+ * LWM Hero Slider — Core Logic (production build)
  *
  * Features:
- *   - Multi-instance: each .sb-slider-root is independent
+ *   - Multi-instance: each .lwm-hero-slider-root is independent
  *   - Readiness system: slides must signal ready before navigation
  *   - FOUC prevention: loader hidden only after start slide is ready
  *   - Header-offset auto-detection (#masthead + #wpadminbar)
  *   - Safety timeout: force-reveals after 5 s even if assets stall
  *
- * All code wrapped in IIFE — no globals except window.SBSlider.
+ * All code wrapped in IIFE — no globals except window.LWMHeroSlider.
  */
 ;(function () {
     'use strict';
 
     var SAFETY_TIMEOUT = 5000; // ms — force-reveal if assets stall
 
-    var SBSlider = window.SBSlider = {
+    var LWMHeroSlider = window.LWMHeroSlider = {
 
         /** Per-slide init callbacks registered by slide-*.js files. */
         _slideInits: [],
@@ -41,12 +41,12 @@
          * Claim a slide — tells core "I will call markSlideReady myself,
          * do NOT auto-mark this slide".
          *
-         * @param {HTMLElement} root       The .sb-slider-root element.
+         * @param {HTMLElement} root       The .lwm-hero-slider-root element.
          * @param {number}      slideIndex Zero-based slide index.
          */
         claimSlide: function (root, slideIndex) {
-            if (root._sbInstance) {
-                root._sbInstance.claimed[slideIndex] = true;
+            if (root._lwmHeroInstance) {
+                root._lwmHeroInstance.claimed[slideIndex] = true;
             }
         },
 
@@ -54,12 +54,12 @@
          * Mark a slide as ready for display.
          * When the start slide becomes ready the loader is removed.
          *
-         * @param {HTMLElement} root       The .sb-slider-root element.
+         * @param {HTMLElement} root       The .lwm-hero-slider-root element.
          * @param {number}      slideIndex Zero-based slide index.
          */
         markSlideReady: function (root, slideIndex) {
-            if (root._sbInstance) {
-                root._sbInstance.markReady(slideIndex);
+            if (root._lwmHeroInstance) {
+                root._lwmHeroInstance.markReady(slideIndex);
             }
         },
 
@@ -68,16 +68,16 @@
         /**
          * Initialise one slider instance.
          *
-         * @param {HTMLElement} root  The .sb-slider-root element.
+         * @param {HTMLElement} root  The .lwm-hero-slider-root element.
          * @param {Object}      opts  { autoplay, interval, start, headerOffset }
          */
         init: function (root, opts) {
             opts = opts || {};
 
-            var slides         = root.querySelectorAll('.sb-slide');
-            var navButtons     = root.querySelectorAll('.sb-slider-nav button');
+            var slides         = root.querySelectorAll('.lwm-hero-slide');
+            var navButtons     = root.querySelectorAll('.lwm-hero-slider-nav button');
             var totalSlides    = slides.length;
-            var videoEl        = root.querySelector('.sb-slide-3 video');
+            var videoEl        = root.querySelector('.lwm-hero-slide-3 video');
             var currentSlide   = opts.start || 0;
             var slide3AnimPlayed = false;
             var autoplayTimer  = null;
@@ -102,18 +102,18 @@
                 }
             };
 
-            root._sbInstance = instance;
+            root._lwmHeroInstance = instance;
 
             function isSlideReady(index) {
                 return allForceReady || !!readySlides[index];
             }
 
             function revealSlider() {
-                if (root.classList.contains('sb-ready')) return;
-                root.classList.add('sb-ready');
+                if (root.classList.contains('lwm-hero-ready')) return;
+                root.classList.add('lwm-hero-ready');
 
                 /* Remove loader element after CSS fade-out (500 ms) */
-                var loader = root.querySelector('.sb-loader');
+                var loader = root.querySelector('.lwm-hero-loader');
                 if (loader) {
                     setTimeout(function () { loader.remove(); }, 600);
                 }
@@ -133,15 +133,15 @@
 
                 var i;
                 for (i = 0; i < slides.length; i++) {
-                    slides[i].classList.remove('sb-active');
+                    slides[i].classList.remove('lwm-hero-active');
                 }
                 for (i = 0; i < navButtons.length; i++) {
-                    navButtons[i].classList.remove('sb-active');
+                    navButtons[i].classList.remove('lwm-hero-active');
                 }
 
-                slides[index].classList.add('sb-active');
+                slides[index].classList.add('lwm-hero-active');
                 if (navButtons[index]) {
-                    navButtons[index].classList.add('sb-active');
+                    navButtons[index].classList.add('lwm-hero-active');
                 }
                 currentSlide = index;
 
@@ -152,7 +152,7 @@
                         videoEl.play().catch(function () {});
 
                         if (!slide3AnimPlayed) {
-                            SBSlider.initSlide3Animations(root);
+                            LWMHeroSlider.initSlide3Animations(root);
                             slide3AnimPlayed = true;
                         }
                     } else {
@@ -162,16 +162,16 @@
 
                 /* Phone levitation on slide 5 (index 4) —
                  * Listen for slide-in animation end, then switch to levitation.
-                 * On return visits .sb-entered is already set → CSS handles
+                 * On return visits .lwm-hero-entered is already set → CSS handles
                  * instant resume via animation-play-state. */
                 if (index === 4) {
-                    var phone = root.querySelector('.sb-phone-mockup');
-                    if (phone && !phone.classList.contains('sb-entered') && !phone._sbListening) {
-                        phone._sbListening = true;
+                    var phone = root.querySelector('.lwm-hero-phone-mockup');
+                    if (phone && !phone.classList.contains('lwm-hero-entered') && !phone._lwmHeroListening) {
+                        phone._lwmHeroListening = true;
                         phone.addEventListener('animationend', function handler(e) {
-                            if (e.animationName === 'sb-slideInPhone') {
+                            if (e.animationName === 'lwm-hero-slideInPhone') {
                                 phone.removeEventListener('animationend', handler);
-                                phone.classList.add('sb-entered');
+                                phone.classList.add('lwm-hero-entered');
                             }
                         });
                     }
@@ -198,8 +198,8 @@
 
             /* ── Navigation: arrows ────────────────── */
 
-            var prevBtn = root.querySelector('.sb-slider-arrow.sb-prev');
-            var nextBtn = root.querySelector('.sb-slider-arrow.sb-next');
+            var prevBtn = root.querySelector('.lwm-hero-slider-arrow.lwm-hero-prev');
+            var nextBtn = root.querySelector('.lwm-hero-slider-arrow.lwm-hero-next');
 
             if (prevBtn) {
                 prevBtn.onclick = function () {
@@ -238,8 +238,8 @@
 
             /* ── Run per-slide initializers ─────────── */
 
-            for (var s = 0; s < SBSlider._slideInits.length; s++) {
-                SBSlider._slideInits[s](root);
+            for (var s = 0; s < LWMHeroSlider._slideInits.length; s++) {
+                LWMHeroSlider._slideInits[s](root);
             }
 
             /* Auto-mark unclaimed slides as ready */
@@ -266,9 +266,9 @@
              * Algorithm:
              *   1. If opts.headerOffset is set → use that value.
              *   2. Otherwise detect #masthead + #wpadminbar heights.
-             *   3. Set CSS variable --sb-header-offset on root.
+             *   3. Set CSS variable --lwm-hero-header-offset on root.
              *   4. Critical CSS applies:
-             *        margin-top: calc(-1 * var(--sb-header-offset))
+             *        margin-top: calc(-1 * var(--lwm-hero-header-offset))
              *      which pulls the slider up behind the header.
              *   5. Recalculate on window resize (debounced).
              */
@@ -279,13 +279,13 @@
                 var isDesktop = window.matchMedia('(min-width: 1025px)').matches;
 
                 if (!isDesktop) {
-                    root.style.setProperty('--sb-header-offset', '0px');
+                    root.style.setProperty('--lwm-hero-header-offset', '0px');
                     return;
                 }
 
                 /* Forced value from shortcode attribute */
                 if (typeof opts.headerOffset === 'number' && opts.headerOffset > 0) {
-                    root.style.setProperty('--sb-header-offset', opts.headerOffset + 'px');
+                    root.style.setProperty('--lwm-hero-header-offset', opts.headerOffset + 'px');
                     return;
                 }
 
@@ -297,7 +297,7 @@
                 if (masthead) offset += masthead.getBoundingClientRect().height;
                 if (adminbar) offset += adminbar.getBoundingClientRect().height;
 
-                root.style.setProperty('--sb-header-offset', offset + 'px');
+                root.style.setProperty('--lwm-hero-header-offset', offset + 'px');
             }
 
             updateHeaderOffset();
@@ -312,15 +312,15 @@
     /* ─── Auto-init all sliders on DOMContentLoaded ──── */
 
     document.addEventListener('DOMContentLoaded', function () {
-        var sliders = document.querySelectorAll('.sb-slider-root[data-sb-slider]');
+        var sliders = document.querySelectorAll('.lwm-hero-slider-root[data-lwm-hero-slider]');
 
         for (var i = 0; i < sliders.length; i++) {
             var opts = {};
             try {
-                opts = JSON.parse(sliders[i].getAttribute('data-sb-options') || '{}');
+                opts = JSON.parse(sliders[i].getAttribute('data-lwm-hero-options') || '{}');
             } catch (e) { /* ignore */ }
 
-            SBSlider.init(sliders[i], opts);
+            LWMHeroSlider.init(sliders[i], opts);
         }
     });
 

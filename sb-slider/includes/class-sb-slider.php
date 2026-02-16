@@ -2,12 +2,12 @@
 /**
  * Main plugin orchestrator (singleton).
  *
- * @package SB_Slider
+ * @package LWM_Hero_Slider
  */
 
 defined( 'ABSPATH' ) || exit;
 
-final class SB_Slider {
+final class LWM_Hero_Slider {
 
     /** @var self|null */
     private static $instance = null;
@@ -23,7 +23,7 @@ final class SB_Slider {
     }
 
     private function __construct() {
-        new SB_Slider_Assets();
-        new SB_Slider_Shortcode();
+        new LWM_Hero_Slider_Assets();
+        new LWM_Hero_Slider_Shortcode();
     }
 }

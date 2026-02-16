@@ -7,12 +7,12 @@
  *   [lwm_hero_slider id="home" autoplay="1" interval="5000" start="0"]
  *   [lwm_hero_slider header_offset="120"]
  *
- * @package SB_Slider
+ * @package LWM_Hero_Slider
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class SB_Slider_Shortcode {
+class LWM_Hero_Slider_Shortcode {
 
     /** @var int Auto-incremented instance counter (unique per page-load). */
     private static $instance_count = 0;
@@ -53,21 +53,21 @@ class SB_Slider_Shortcode {
 
         /*
          * !important on the two FOUC rules is REQUIRED because the
-         * external slider-core.css sets .sb-slide.sb-active { opacity:1 }
+         * external slider-core.css sets .lwm-hero-slide.lwm-hero-active { opacity:1 }
          * which would otherwise override the loading-state hide.
          * This is the ONLY place !important is used.
          */
         ?>
-<style id="sb-slider-critical">
-.sb-slider-root{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#000;--sb-header-offset:0px}
-.sb-slider-root:not(.sb-ready) .sb-slide,
-.sb-slider-root:not(.sb-ready) .sb-slider-arrow,
-.sb-slider-root:not(.sb-ready) .sb-slider-nav{opacity:0!important;pointer-events:none!important}
-.sb-slider-root .sb-loader{position:absolute;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:#000;transition:opacity .5s ease}
-.sb-slider-root.sb-ready .sb-loader{opacity:0;pointer-events:none}
-.sb-loader__spinner{width:48px;height:48px;border:3px solid rgba(202,156,87,.2);border-top-color:#ca9c57;border-radius:50%;animation:sb-spin .8s linear infinite;box-sizing:border-box}
-@keyframes sb-spin{to{transform:rotate(360deg)}}
-@media(min-width:1025px){.sb-slider-root{margin-top:calc(-1 * var(--sb-header-offset))}}
+<style id="lwm-hero-slider-critical">
+.lwm-hero-slider-root{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#000;--lwm-hero-header-offset:0px}
+.lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slide,
+.lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slider-arrow,
+.lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slider-nav{opacity:0!important;pointer-events:none!important}
+.lwm-hero-slider-root .lwm-hero-loader{position:absolute;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:#000;transition:opacity .5s ease}
+.lwm-hero-slider-root.lwm-hero-ready .lwm-hero-loader{opacity:0;pointer-events:none}
+.lwm-hero-loader__spinner{width:48px;height:48px;border:3px solid rgba(202,156,87,.2);border-top-color:#ca9c57;border-radius:50%;animation:lwm-hero-spin .8s linear infinite;box-sizing:border-box}
+@keyframes lwm-hero-spin{to{transform:rotate(360deg)}}
+@media(min-width:1025px){.lwm-hero-slider-root{margin-top:calc(-1 * var(--lwm-hero-header-offset))}}
 </style>
         <?php
     }
@@ -92,7 +92,7 @@ class SB_Slider_Shortcode {
     public function render( $atts ): string {
 
         /* Fallback enqueue (for page builders that bypass has_shortcode) */
-        SB_Slider_Assets::enqueue_all();
+        LWM_Hero_Slider_Assets::enqueue_all();
 
         /* Parse attributes */
         $atts = shortcode_atts(
@@ -125,7 +125,7 @@ class SB_Slider_Shortcode {
 
         /* Inline style (forced header offset only) */
         $inline_style = $has_forced_offset
-            ? sprintf( '--sb-header-offset:%dpx', absint( $atts['header_offset'] ) )
+            ? sprintf( '--lwm-hero-header-offset:%dpx', absint( $atts['header_offset'] ) )
             : '';
 
         /* Wrapper ID */
@@ -141,22 +141,22 @@ class SB_Slider_Shortcode {
         }
         ?>
 
-        <div class="sb-slider-root"
-             data-sb-slider="<?php echo (int) $instance_id; ?>"
-             data-sb-options="<?php echo esc_attr( wp_json_encode( $js_options ) ); ?>"
+        <div class="lwm-hero-slider-root"
+             data-lwm-hero-slider="<?php echo (int) $instance_id; ?>"
+             data-lwm-hero-options="<?php echo esc_attr( wp_json_encode( $js_options ) ); ?>"
              <?php if ( $wrapper_id ) : ?>id="<?php echo esc_attr( $wrapper_id ); ?>"<?php endif; ?>
              <?php if ( $inline_style ) : ?>style="<?php echo esc_attr( $inline_style ); ?>"<?php endif; ?>
         >
 
-            <!-- Loader: visible until JS adds .sb-ready -->
-            <div class="sb-loader" aria-hidden="true">
-                <div class="sb-loader__spinner"></div>
+            <!-- Loader: visible until JS adds .lwm-hero-ready -->
+            <div class="lwm-hero-loader" aria-hidden="true">
+                <div class="lwm-hero-loader__spinner"></div>
             </div>
 
             <?php
             foreach ( self::SLIDE_FILES as $index => $file ) {
                 $is_active = ( $index === $start_index );
-                $template  = SB_SLIDER_PATH . 'templates/slides/' . $file;
+                $template  = LWM_HERO_SLIDER_PATH . 'templates/slides/' . $file;
 
                 if ( file_exists( $template ) ) {
                     include $template;
@@ -165,13 +165,13 @@ class SB_Slider_Shortcode {
             ?>
 
             <!-- Navigation: arrows -->
-            <div class="sb-slider-arrow sb-prev"></div>
-            <div class="sb-slider-arrow sb-next"></div>
+            <div class="lwm-hero-slider-arrow lwm-hero-prev"></div>
+            <div class="lwm-hero-slider-arrow lwm-hero-next"></div>
 
             <!-- Navigation: dots -->
-            <div class="sb-slider-nav">
+            <div class="lwm-hero-slider-nav">
                 <?php for ( $i = 0; $i < $slide_count; $i ++ ) : ?>
-                    <button<?php echo $i === $start_index ? ' class="sb-active"' : ''; ?> data-slide="<?php echo (int) $i; ?>"></button>
+                    <button<?php echo $i === $start_index ? ' class="lwm-hero-active"' : ''; ?> data-slide="<?php echo (int) $i; ?>"></button>
                 <?php endfor; ?>
             </div>
 

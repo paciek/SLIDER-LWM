@@ -3,7 +3,7 @@
    Zostań współautorem książki
    ============================================ */
 
-.sb-slider-root .sb-slide-4 {
+.lwm-hero-slider-root .lwm-hero-slide-4 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,7 +12,7 @@
 }
 
 /* --- Animated Background --- */
-.sb-slider-root .sb-slide-4 .sb-book-bg {
+.lwm-hero-slider-root .lwm-hero-slide-4 .lwm-hero-book-bg {
     position: absolute;
     inset: -10%;
     background-image: url('https://lekcjewartemiliony.pl/wp-content/uploads/2025/05/slider-ksiazka.jpg');
@@ -21,11 +21,11 @@
     z-index: 0;
 }
 
-.sb-slider-root .sb-slide-4.sb-active .sb-book-bg {
-    animation: sb-diagonalZoom 20s ease-in-out infinite;
+.lwm-hero-slider-root .lwm-hero-slide-4.lwm-hero-active .lwm-hero-book-bg {
+    animation: lwm-hero-diagonalZoom 20s ease-in-out infinite;
 }
 
-@keyframes sb-diagonalZoom {
+@keyframes lwm-hero-diagonalZoom {
     0%, 100% {
         transform: scale(1.1) translate(0, 0);
     }
@@ -41,7 +41,7 @@
 }
 
 /* --- Animated Gradient Overlay --- */
-.sb-slider-root .sb-slide-4::before {
+.lwm-hero-slider-root .lwm-hero-slide-4::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -55,11 +55,11 @@
     z-index: 1;
 }
 
-.sb-slider-root .sb-slide-4.sb-active::before {
-    animation: sb-gradientShift 15s ease infinite;
+.lwm-hero-slider-root .lwm-hero-slide-4.lwm-hero-active::before {
+    animation: lwm-hero-gradientShift 15s ease infinite;
 }
 
-@keyframes sb-gradientShift {
+@keyframes lwm-hero-gradientShift {
     0%, 100% {
         background-position: 0% 50%;
     }
@@ -69,7 +69,7 @@
 }
 
 /* --- Content --- */
-.sb-slider-root .sb-slide-4 .sb-content-wrapper-centered {
+.lwm-hero-slider-root .lwm-hero-slide-4 .lwm-hero-content-wrapper-centered {
     position: relative;
     z-index: 2;
     text-align: center;
@@ -77,7 +77,7 @@
     max-width: 1000px;
 }
 
-.sb-slider-root .sb-slide-4 h2 {
+.lwm-hero-slider-root .lwm-hero-slide-4 h2 {
     font-family: 'Arial', sans-serif;
     font-size: 72px;
     font-weight: 900;
@@ -90,11 +90,11 @@
     transform: translateY(40px);
 }
 
-.sb-slider-root .sb-slide-4.sb-active h2 {
-    animation: sb-slideUpFadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s forwards;
+.lwm-hero-slider-root .lwm-hero-slide-4.lwm-hero-active h2 {
+    animation: lwm-hero-slideUpFadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s forwards;
 }
 
-.sb-slider-root .sb-slide-4 .sb-book-description {
+.lwm-hero-slider-root .lwm-hero-slide-4 .lwm-hero-book-description {
     font-family: 'Arial', sans-serif;
     font-size: 24px;
     font-weight: 300;
@@ -106,20 +106,20 @@
     transform: translateY(30px);
 }
 
-.sb-slider-root .sb-slide-4.sb-active .sb-book-description {
-    animation: sb-slideUpFadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.6s forwards;
+.lwm-hero-slider-root .lwm-hero-slide-4.lwm-hero-active .lwm-hero-book-description {
+    animation: lwm-hero-slideUpFadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.6s forwards;
 }
 
-.sb-slider-root .sb-slide-4 .sb-cta-button {
+.lwm-hero-slider-root .lwm-hero-slide-4 .lwm-hero-cta-button {
     opacity: 0;
     transform: translateY(30px) scale(0.9);
 }
 
-.sb-slider-root .sb-slide-4.sb-active .sb-cta-button {
-    animation: sb-buttonPopIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s forwards;
+.lwm-hero-slider-root .lwm-hero-slide-4.lwm-hero-active .lwm-hero-cta-button {
+    animation: lwm-hero-buttonPopIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s forwards;
 }
 
-@keyframes sb-buttonPopIn {
+@keyframes lwm-hero-buttonPopIn {
     from {
         opacity: 0;
         transform: translateY(30px) scale(0.9);
@@ -132,37 +132,37 @@
 
 /* --- Responsive --- */
 @media (max-width: 1024px) {
-    .sb-slider-root .sb-slide-4 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-4 h2 {
         font-size: 58px;
     }
 
-    .sb-slider-root .sb-slide-4 .sb-book-description {
+    .lwm-hero-slider-root .lwm-hero-slide-4 .lwm-hero-book-description {
         font-size: 20px;
     }
 }
 
 @media (max-width: 768px) {
-    .sb-slider-root .sb-slide-4 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-4 h2 {
         font-size: 44px;
     }
 
-    .sb-slider-root .sb-slide-4 .sb-book-description {
+    .lwm-hero-slider-root .lwm-hero-slide-4 .lwm-hero-book-description {
         font-size: 18px;
     }
 }
 
 @media (max-width: 480px) {
-    .sb-slider-root .sb-slide-4 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-4 h2 {
         font-size: 36px;
     }
 
-    .sb-slider-root .sb-slide-4 .sb-book-description {
+    .lwm-hero-slider-root .lwm-hero-slide-4 .lwm-hero-book-description {
         font-size: 16px;
     }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
-    .sb-slider-root .sb-slide-4 h2 {
+    .lwm-hero-slider-root .lwm-hero-slide-4 h2 {
         font-size: 28px;
     }
 }

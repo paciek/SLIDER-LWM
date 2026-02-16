@@ -7,19 +7,19 @@
  *   RAF loop   → lerp interpolation  → two transform3d writes (GPU-composited)
  *   Result: 60 fps, buttery smooth, zero layout thrashing
  */
-SBSlider.registerSlideInit(function (root) {
-    var slide2    = root.querySelector('.sb-slide-2');
-    var content   = root.querySelector('.sb-slide-2 .sb-content-layer');
-    var character = root.querySelector('.sb-slide-2 .sb-character-image');
+LWMHeroSlider.registerSlideInit(function (root) {
+    var slide2    = root.querySelector('.lwm-hero-slide-2');
+    var content   = root.querySelector('.lwm-hero-slide-2 .lwm-hero-content-layer');
+    var character = root.querySelector('.lwm-hero-slide-2 .lwm-hero-character-image');
 
     if (!slide2 || !content || !character) return;
 
     /* Claim slide 1 — we handle readiness */
-    SBSlider.claimSlide(root, 1);
+    LWMHeroSlider.claimSlide(root, 1);
 
     /* Mark ready once the character image has loaded */
     function onImageReady() {
-        SBSlider.markSlideReady(root, 1);
+        LWMHeroSlider.markSlideReady(root, 1);
     }
 
     if (character.complete && character.naturalWidth > 0) {
@@ -139,14 +139,14 @@ SBSlider.registerSlideInit(function (root) {
     }
 
     var observer = new MutationObserver(function () {
-        var nowActive = slide2.classList.contains('sb-active');
+        var nowActive = slide2.classList.contains('lwm-hero-active');
         if (nowActive && !isActive)  onActivate();
         else if (!nowActive && isActive) onDeactivate();
     });
     observer.observe(slide2, { attributes: true, attributeFilter: ['class'] });
 
     /* Initial state */
-    if (slide2.classList.contains('sb-active')) onActivate();
+    if (slide2.classList.contains('lwm-hero-active')) onActivate();
 
     /* Recache dimensions on resize (debounced) */
     var resizeTimer;
