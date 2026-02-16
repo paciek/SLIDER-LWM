@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: SB Slider
+ * Plugin Name: LWM Hero Slider
  * Plugin URI:  https://lekcjewartemiliony.pl
- * Description: Slider "Sposób na Milion" — w pełni izolowany, osadzany shortcodem [sb_slider].
+ * Description: Autorski, w pełni izolowany slider hero dla marki Lekcje Warte Miliony. Zoptymalizowany pod performance (RAF render pipeline, FOUC prevention, slide readiness). Osadzany shortcodem [lwm_hero_slider].
  * Version:     1.0.0
- * Author:      Lekcje Warte Miliony
+ * Author:      Kamil Paciepnik
  * License:     GPL-2.0+
  * Text Domain: sb-slider
  */

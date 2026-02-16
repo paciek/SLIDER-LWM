@@ -1,11 +1,11 @@
 <?php
 /**
- * [sb_slider] shortcode — renders the complete slider markup.
+ * [lwm_hero_slider] shortcode — renders the complete slider markup.
  *
  * Usage:
- *   [sb_slider]
- *   [sb_slider id="home" autoplay="1" interval="5000" start="0"]
- *   [sb_slider header_offset="120"]
+ *   [lwm_hero_slider]
+ *   [lwm_hero_slider id="home" autoplay="1" interval="5000" start="0"]
+ *   [lwm_hero_slider header_offset="120"]
  *
  * @package SB_Slider
  */
@@ -40,7 +40,7 @@ class SB_Slider_Shortcode {
     ];
 
     public function __construct() {
-        add_shortcode( 'sb_slider', [ $this, 'render' ] );
+        add_shortcode( 'lwm_hero_slider', [ $this, 'render' ] );
     }
 
     /* ─── Critical inline CSS (once per page, before first slider) ─ */
@@ -104,7 +104,7 @@ class SB_Slider_Shortcode {
                 'header_offset' => '',   // empty = auto-detect; number = forced px value
             ],
             $atts,
-            'sb_slider'
+            'lwm_hero_slider'
         );
 
         $instance_id = ++ self::$instance_count;

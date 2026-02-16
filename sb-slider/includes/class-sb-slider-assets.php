@@ -2,7 +2,7 @@
 /**
  * Conditional asset registration and enqueue.
  *
- * Assets are registered early but only enqueued when the [sb_slider]
+ * Assets are registered early but only enqueued when the [lwm_hero_slider]
  * shortcode is present — either detected via has_shortcode() in the
  * main post, or flagged at render-time (fallback for page builders).
  *
@@ -90,7 +90,7 @@ class SB_Slider_Assets {
 
         if (
             is_a( $post, 'WP_Post' ) &&
-            has_shortcode( $post->post_content, 'sb_slider' )
+            has_shortcode( $post->post_content, 'lwm_hero_slider' )
         ) {
             self::enqueue_all();
         }
