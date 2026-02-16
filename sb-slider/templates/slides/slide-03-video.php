@@ -22,6 +22,6 @@ defined( 'ABSPATH' ) || exit;
             <span class="lwm-hero-line">Twój wpływ</span>
         </h1>
         <p class="lwm-hero-video-description">Stwórz markę osobistą, która przyciąga klientów<br>i otwiera drzwi do nowych możliwości</p>
-        <a href="#" class="lwm-hero-cta-button lwm-hero-video-cta">Jak zacząć?</a>
+        <a href="<?php echo esc_url( 'https://lekcjewartemiliony.pl/zostan-wspolautorem-ksiazki/' ); ?>" class="lwm-hero-cta-button lwm-hero-video-cta">Jak zacząć?</a>
     </div>
 </div>

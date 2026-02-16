@@ -35,8 +35,8 @@ class LWM_Hero_Slider_Shortcode {
      * Ensures the hero image appears without pop-in.
      */
     private const PRELOAD_IMAGES = [
-        'https://new.lekcjewartemiliony.pl/wp-content/uploads/2026/02/snm-kurs-jak-stworzyc-firme-bez-kapitalu-slider-background.jpg',
-        'https://new.lekcjewartemiliony.pl/wp-content/uploads/2026/02/snm-kurs-jak-stworzyc-firme-bez-kapitalu-slider-produkt.png',
+        'https://lekcjewartemiliony.pl/wp-content/uploads/2026/02/snm-kurs-jak-stworzyc-firme-bez-kapitalu-slider-background.jpg',
+        'https://lekcjewartemiliony.pl/wp-content/uploads/2026/02/snm-kurs-jak-stworzyc-firme-bez-kapitalu-slider-produkt.png',
     ];
 
     public function __construct() {

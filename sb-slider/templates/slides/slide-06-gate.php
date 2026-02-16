@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
     <!-- Gate image -->
     <div class="lwm-hero-gate-container">
-        <img src="<?php echo esc_url( 'https://lekcjewartemiliony.pl/wp-content/uploads/2026/02/drzwi.png' ); ?>" alt="Gate" class="lwm-hero-gate-image">
+        <img src="<?php echo esc_url( 'https://lekcjewartemiliony.pl/wp-content/uploads/2026/02/drzwi.png' ); ?>" alt="Złote drzwi — Bogactwo to decyzja" class="lwm-hero-gate-image">
     </div>
 
     <!-- Text content -->
@@ -28,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
         <div class="lwm-hero-right-text">
             <p class="lwm-hero-right-description">Zarabianie to kompetencja.<br>Oszczędzanie to strategia.<br>Milion to efekt.</p>
             <div class="lwm-hero-cta-container">
-                <a href="#" class="lwm-hero-cta-button">Zaczynam zmianę</a>
+                <a href="<?php echo esc_url( 'https://sposobnamilion.pl/' ); ?>" target="_blank" rel="noopener noreferrer" class="lwm-hero-cta-button">Zaczynam zmianę</a>
             </div>
         </div>
     </div>

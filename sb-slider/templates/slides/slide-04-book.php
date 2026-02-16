@@ -13,6 +13,6 @@ defined( 'ABSPATH' ) || exit;
     <div class="lwm-hero-content-wrapper-centered">
         <h2>Zostań współautorem<br><span class="lwm-hero-highlight">książki</span></h2>
         <p class="lwm-hero-book-description">Podziel się swoją historią i osiągnij sukces, który buduje zarówno Twoją markę osobistą, jak i firmę</p>
-        <a href="#" class="lwm-hero-cta-button">Dołącz do projektu</a>
+        <a href="<?php echo esc_url( 'https://lekcjewartemiliony.pl/zostan-wspolautorem-ksiazki/' ); ?>" class="lwm-hero-cta-button">Dołącz do projektu</a>
     </div>
 </div>

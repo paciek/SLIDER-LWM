@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
             <div class="lwm-hero-floating-element"></div>
             <div class="lwm-hero-floating-element"></div>
             <div class="lwm-hero-floating-element"></div>
-            <img src="<?php echo esc_url( 'https://new.lekcjewartemiliony.pl/wp-content/uploads/2026/02/snm-kurs-jak-stworzyc-firme-bez-kapitalu-slider-produkt.png' ); ?>" alt="Produkt" class="lwm-hero-product-image">
+            <img src="<?php echo esc_url( 'https://lekcjewartemiliony.pl/wp-content/uploads/2026/02/snm-kurs-jak-stworzyc-firme-bez-kapitalu-slider-produkt.png' ); ?>" alt="Kurs Jak stworzyć firmę bez kapitału — mockup produktu" class="lwm-hero-product-image">
         </div>
     </div>
 </div>
