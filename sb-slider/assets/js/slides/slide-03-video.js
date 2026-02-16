@@ -3,6 +3,9 @@
  * Letter-by-letter focus-in text animation.
  * Runs only on first activation (one-shot).
  */
+
+/* The animation function is called from showSlide() in core
+   when the user first navigates to slide 3. */
 SBSlider.initSlide3Animations = function (root) {
     var slide3 = root.querySelector('.sb-slide-3');
     if (!slide3) return;
@@ -21,7 +24,7 @@ SBSlider.initSlide3Animations = function (root) {
     }
 
     /* Count letters in description */
-    var descText       = description ? description.textContent : '';
+    var descText         = description ? description.textContent : '';
     var totalDescLetters = descText.length;
 
     /* ── Animate title letter-by-letter ───────── */
@@ -60,7 +63,7 @@ SBSlider.initSlide3Animations = function (root) {
 
     /* ── Button appears after ~40 % of letters ── */
     if (button) {
-        var maxLetters      = Math.max(totalTitleLetters, totalDescLetters);
+        var maxLetters       = Math.max(totalTitleLetters, totalDescLetters);
         var buttonStartAfter = Math.floor(maxLetters * 0.4);
         button.style.animationDelay = (startDelay + buttonStartAfter * letterStagger) + 's';
     }
@@ -69,7 +72,7 @@ SBSlider.initSlide3Animations = function (root) {
     slide3.classList.add('sb-first-time-active');
 
     /* After all animations finish → lock visible state */
-    var maxL = Math.max(totalTitleLetters, totalDescLetters);
+    var maxL        = Math.max(totalTitleLetters, totalDescLetters);
     var totalAnimMs = (startDelay + maxL * letterStagger + 0.9) * 1000;
 
     setTimeout(function () {
@@ -77,3 +80,12 @@ SBSlider.initSlide3Animations = function (root) {
         slide3.classList.add('sb-animation-completed');
     }, totalAnimMs);
 };
+
+/* ── Readiness: claim + mark immediately ────────
+ * Video has preload="auto"; the animation itself doesn't
+ * start until showSlide navigates here, so the slide
+ * is ready as soon as DOM is parsed.                       */
+SBSlider.registerSlideInit(function (root) {
+    SBSlider.claimSlide(root, 2);
+    SBSlider.markSlideReady(root, 2);
+});

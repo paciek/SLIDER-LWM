@@ -1,22 +1,29 @@
 /**
- * SB Slider — Core Logic
+ * SB Slider — Core Logic (production build)
  *
- * Multi-instance: each .sb-slider-root on the page gets its own
- * independent state (currentSlide, events, timers).
+ * Features:
+ *   - Multi-instance: each .sb-slider-root is independent
+ *   - Readiness system: slides must signal ready before navigation
+ *   - FOUC prevention: loader hidden only after start slide is ready
+ *   - Header-offset auto-detection (#masthead + #wpadminbar)
+ *   - Safety timeout: force-reveals after 5 s even if assets stall
  *
- * Wrapped in IIFE to avoid polluting global scope / conflicting
- * with jQuery, GSAP, or page-builder scripts.
+ * All code wrapped in IIFE — no globals except window.SBSlider.
  */
 ;(function () {
     'use strict';
 
+    var SAFETY_TIMEOUT = 5000; // ms — force-reveal if assets stall
+
     var SBSlider = window.SBSlider = {
 
-        /** Per-slide init functions registered by slide-*.js files. */
+        /** Per-slide init callbacks registered by slide-*.js files. */
         _slideInits: [],
 
         /**
          * Register a per-slide initializer.
+         * Called by each slide-XX.js at parse time.
+         *
          * @param {function(HTMLElement)} fn  Receives the slider root element.
          */
         registerSlideInit: function (fn) {
@@ -25,34 +32,106 @@
 
         /**
          * Placeholder — overwritten by slide-03-video.js.
-         * @param {HTMLElement} root
          */
         initSlide3Animations: function () {},
 
-        /* ─── Instance initializer ───────────────────────── */
+        /* ─── Readiness API ────────────────────────── */
+
+        /**
+         * Claim a slide — tells core "I will call markSlideReady myself,
+         * do NOT auto-mark this slide".
+         *
+         * @param {HTMLElement} root       The .sb-slider-root element.
+         * @param {number}      slideIndex Zero-based slide index.
+         */
+        claimSlide: function (root, slideIndex) {
+            if (root._sbInstance) {
+                root._sbInstance.claimed[slideIndex] = true;
+            }
+        },
+
+        /**
+         * Mark a slide as ready for display.
+         * When the start slide becomes ready the loader is removed.
+         *
+         * @param {HTMLElement} root       The .sb-slider-root element.
+         * @param {number}      slideIndex Zero-based slide index.
+         */
+        markSlideReady: function (root, slideIndex) {
+            if (root._sbInstance) {
+                root._sbInstance.markReady(slideIndex);
+            }
+        },
+
+        /* ─── Instance initializer ─────────────────── */
 
         /**
          * Initialise one slider instance.
          *
-         * @param {HTMLElement} root    The .sb-slider-root element.
-         * @param {Object}      opts    { autoplay, interval, start }
+         * @param {HTMLElement} root  The .sb-slider-root element.
+         * @param {Object}      opts  { autoplay, interval, start, headerOffset }
          */
         init: function (root, opts) {
             opts = opts || {};
 
-            var slides      = root.querySelectorAll('.sb-slide');
-            var navButtons  = root.querySelectorAll('.sb-slider-nav button');
-            var totalSlides = slides.length;
-            var videoEl     = root.querySelector('.sb-slide-3 video');
-            var currentSlide        = 0;
-            var slide3AnimPlayed    = false;
-            var autoplayTimer       = null;
+            var slides         = root.querySelectorAll('.sb-slide');
+            var navButtons     = root.querySelectorAll('.sb-slider-nav button');
+            var totalSlides    = slides.length;
+            var videoEl        = root.querySelector('.sb-slide-3 video');
+            var currentSlide   = opts.start || 0;
+            var slide3AnimPlayed = false;
+            var autoplayTimer  = null;
 
-            /* ── showSlide ────────────────────────────────── */
+            /* ── Readiness tracking ─────────────────── */
+
+            var readySlides  = {};   // slideIndex → true
+            var claimed      = {};   // slideIndex → true (won't auto-mark)
+            var allForceReady = false;
+
+            var instance = {
+                claimed: claimed,
+
+                markReady: function (slideIndex) {
+                    if (readySlides[slideIndex]) return;
+                    readySlides[slideIndex] = true;
+
+                    /* When start slide is ready → reveal the slider */
+                    if (slideIndex === (opts.start || 0)) {
+                        revealSlider();
+                    }
+                }
+            };
+
+            root._sbInstance = instance;
+
+            function isSlideReady(index) {
+                return allForceReady || !!readySlides[index];
+            }
+
+            function revealSlider() {
+                if (root.classList.contains('sb-ready')) return;
+                root.classList.add('sb-ready');
+
+                /* Remove loader element after CSS fade-out (500 ms) */
+                var loader = root.querySelector('.sb-loader');
+                if (loader) {
+                    setTimeout(function () { loader.remove(); }, 600);
+                }
+            }
+
+            /* Safety timeout — force everything visible */
+            setTimeout(function () {
+                allForceReady = true;
+                revealSlider();
+            }, SAFETY_TIMEOUT);
+
+            /* ── showSlide ─────────────────────────── */
 
             function showSlide(index) {
-                var i;
+                /* Block navigation to slides that aren't ready yet */
+                if (!isSlideReady(index)) return;
 
+                var i;
                 for (i = 0; i < slides.length; i++) {
                     slides[i].classList.remove('sb-active');
                 }
@@ -91,16 +170,26 @@
                     }
                 }
 
-                /* Reset autoplay timer on manual interaction */
-                if (opts.autoplay && autoplayTimer) {
-                    clearInterval(autoplayTimer);
-                    autoplayTimer = setInterval(function () {
-                        showSlide((currentSlide + 1) % totalSlides);
-                    }, opts.interval || 5000);
-                }
+                /* Reset autoplay timer so full interval applies */
+                resetAutoplay();
             }
 
-            /* ── Navigation: arrows ───────────────────────── */
+            /* ── Autoplay ──────────────────────────── */
+
+            function resetAutoplay() {
+                if (!opts.autoplay) return;
+                if (autoplayTimer) clearInterval(autoplayTimer);
+                autoplayTimer = setInterval(function () {
+                    var next = (currentSlide + 1) % totalSlides;
+                    if (isSlideReady(next)) {
+                        showSlide(next);
+                    }
+                    /* If next slide isn't ready, skip this tick —
+                       autoplay will try again at the next interval. */
+                }, opts.interval || 5000);
+            }
+
+            /* ── Navigation: arrows ────────────────── */
 
             var prevBtn = root.querySelector('.sb-slider-arrow.sb-prev');
             var nextBtn = root.querySelector('.sb-slider-arrow.sb-next');
@@ -116,7 +205,7 @@
                 };
             }
 
-            /* ── Navigation: dots ─────────────────────────── */
+            /* ── Navigation: dots ──────────────────── */
 
             for (var k = 0; k < navButtons.length; k++) {
                 (function (idx) {
@@ -126,7 +215,7 @@
                 })(k);
             }
 
-            /* ── Video unlock (autoplay policy) ───────────── */
+            /* ── Video unlock (autoplay policy) ────── */
 
             if (videoEl) {
                 videoEl.play().catch(function () {
@@ -140,27 +229,80 @@
                 });
             }
 
-            /* ── Run per-slide initializers ────────────────── */
+            /* ── Run per-slide initializers ─────────── */
 
             for (var s = 0; s < SBSlider._slideInits.length; s++) {
                 SBSlider._slideInits[s](root);
             }
 
-            /* ── Show initial slide ───────────────────────── */
+            /* Auto-mark unclaimed slides as ready */
+            for (var si = 0; si < totalSlides; si++) {
+                if (!claimed[si]) {
+                    instance.markReady(si);
+                }
+            }
+
+            /* ── Show initial slide ────────────────── */
 
             showSlide(opts.start || 0);
 
-            /* ── Autoplay ─────────────────────────────────── */
+            /* ── Start autoplay ────────────────────── */
 
             if (opts.autoplay) {
-                autoplayTimer = setInterval(function () {
-                    showSlide((currentSlide + 1) % totalSlides);
-                }, opts.interval || 5000);
+                resetAutoplay();
             }
+
+            /* ── Header offset compensation ─────────── *
+             *
+             * Desktop only (≥1025 px).
+             *
+             * Algorithm:
+             *   1. If opts.headerOffset is set → use that value.
+             *   2. Otherwise detect #masthead + #wpadminbar heights.
+             *   3. Set CSS variable --sb-header-offset on root.
+             *   4. Critical CSS applies:
+             *        margin-top: calc(-1 * var(--sb-header-offset))
+             *      which pulls the slider up behind the header.
+             *   5. Recalculate on window resize (debounced).
+             */
+
+            var resizeTimer;
+
+            function updateHeaderOffset() {
+                var isDesktop = window.matchMedia('(min-width: 1025px)').matches;
+
+                if (!isDesktop) {
+                    root.style.setProperty('--sb-header-offset', '0px');
+                    return;
+                }
+
+                /* Forced value from shortcode attribute */
+                if (typeof opts.headerOffset === 'number' && opts.headerOffset > 0) {
+                    root.style.setProperty('--sb-header-offset', opts.headerOffset + 'px');
+                    return;
+                }
+
+                /* Auto-detect */
+                var offset   = 0;
+                var masthead = document.getElementById('masthead');
+                var adminbar = document.getElementById('wpadminbar');
+
+                if (masthead) offset += masthead.getBoundingClientRect().height;
+                if (adminbar) offset += adminbar.getBoundingClientRect().height;
+
+                root.style.setProperty('--sb-header-offset', offset + 'px');
+            }
+
+            updateHeaderOffset();
+
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(updateHeaderOffset, 150);
+            });
         }
     };
 
-    /* ─── Auto-init all sliders on DOMContentLoaded ──────── */
+    /* ─── Auto-init all sliders on DOMContentLoaded ──── */
 
     document.addEventListener('DOMContentLoaded', function () {
         var sliders = document.querySelectorAll('.sb-slider-root[data-sb-slider]');

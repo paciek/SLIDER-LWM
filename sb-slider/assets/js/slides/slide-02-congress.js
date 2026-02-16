@@ -1,6 +1,6 @@
 /**
  * Slide 02 — Congress
- * Parallax effect on content layer and character image.
+ * Parallax effect on content layer + character image + asset preload.
  */
 SBSlider.registerSlideInit(function (root) {
     var slide2    = root.querySelector('.sb-slide-2');
@@ -9,6 +9,22 @@ SBSlider.registerSlideInit(function (root) {
 
     if (!slide2 || !content || !character) return;
 
+    /* Claim slide 1 — we handle readiness */
+    SBSlider.claimSlide(root, 1);
+
+    /* Mark ready once the character image has loaded */
+    function onImageReady() {
+        SBSlider.markSlideReady(root, 1);
+    }
+
+    if (character.complete && character.naturalWidth > 0) {
+        onImageReady();
+    } else {
+        character.onload  = onImageReady;
+        character.onerror = onImageReady;
+    }
+
+    /* Parallax on cursor move */
     slide2.addEventListener('mousemove', function (e) {
         if (!slide2.classList.contains('sb-active')) return;
 

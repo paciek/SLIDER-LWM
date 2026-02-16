@@ -117,8 +117,21 @@
     line-height: 1.5;
     color: #fff;
     background: #000;
+    --sb-header-offset: 0px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Header offset (desktop only) ─────────── *
+ * --sb-header-offset is set by JS (auto-detect
+ * or forced via shortcode attribute).
+ * Pulls the slider up behind the site header
+ * so it acts as a full-bleed hero.              */
+
+@media (min-width: 1025px) {
+    .sb-slider-root {
+        margin-top: calc(-1 * var(--sb-header-offset));
+    }
 }
 
 /* ─── Slide Base ───────────────────────────── */
@@ -137,6 +150,27 @@
     opacity: 1;
     pointer-events: auto;
     z-index: 2;
+}
+
+/* ─── Loader ───────────────────────────────── *
+ * Main styles are in the inline critical CSS.
+ * This block adds the smooth removal transition
+ * that can safely live in the external sheet.   */
+
+.sb-slider-root .sb-loader {
+    position: absolute;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    transition: opacity 0.5s ease;
+}
+
+.sb-slider-root.sb-ready .sb-loader {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* ─── CTA Button (shared across slides) ───── */
