@@ -1,0 +1,276 @@
+/* ============================================
+   SLIDE 01 - PRODUCT
+   Kurs "Jak stworzyć firmę bez kapitału"
+   ============================================ */
+
+.sb-slider-root .sb-slide-1 {
+    background-image: url('https://new.lekcjewartemiliony.pl/wp-content/uploads/2026/02/snm-kurs-jak-stworzyc-firme-bez-kapitalu-slider-background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 80px;
+}
+
+.sb-slider-root .sb-slide-1::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.3) 100%);
+    z-index: 1;
+}
+
+/* --- Content Wrapper --- */
+.sb-slider-root .sb-slide-1 .sb-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    flex-direction: row-reverse;
+}
+
+.sb-slider-root .sb-slide-1 .sb-text-content {
+    flex: 1;
+    max-width: 650px;
+    color: #fff;
+}
+
+/* --- Badge --- */
+.sb-slider-root .sb-slide-1 .sb-badge {
+    display: inline-flex;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, rgba(202, 156, 87, 0.2) 0%, rgba(202, 156, 87, 0.1) 100%);
+    border: 2px solid #ca9c57;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+/* --- Heading --- */
+.sb-slider-root .sb-slide-1 h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 68px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0 0 30px 0;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
+}
+
+/* --- Subtitle --- */
+.sb-slider-root .sb-slide-1 .sb-subtitle {
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    line-height: 1.6;
+    margin: 0 0 50px 0;
+    opacity: 0.9;
+    font-weight: 300;
+    color: #fff;
+}
+
+/* --- Features List --- */
+.sb-slider-root .sb-slide-1 .sb-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+    list-style: none;
+}
+
+.sb-slider-root .sb-slide-1 .sb-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.sb-slider-root .sb-slide-1 .sb-feature-item::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    background: linear-gradient(135deg, #ca9c57 0%, #dab578 100%);
+    color: #1a1a2e;
+    border-radius: 50%;
+    font-weight: 900;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+/* --- Product Container --- */
+.sb-slider-root .sb-slide-1 .sb-product-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.sb-slider-root .sb-slide-1 .sb-product-image {
+    width: 700px;
+    height: auto;
+    display: block;
+    transition: transform 0.1s ease-out;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+}
+
+/* --- Floating Dollar Signs --- */
+.sb-slider-root .sb-slide-1 .sb-floating-element {
+    position: absolute;
+    animation: sb-float 3s ease-in-out infinite;
+    font-family: 'Arial', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ca9c57;
+    opacity: 0.6;
+    text-shadow: 0 4px 10px rgba(202, 156, 87, 0.3);
+}
+
+.sb-slider-root .sb-slide-1 .sb-floating-element::before {
+    content: '$';
+}
+
+.sb-slider-root .sb-slide-1 .sb-floating-element:nth-child(1) {
+    top: 15%;
+    left: 10%;
+    font-size: 52px;
+}
+
+.sb-slider-root .sb-slide-1 .sb-floating-element:nth-child(2) {
+    bottom: 25%;
+    left: 5%;
+    animation-delay: 1s;
+    font-size: 36px;
+}
+
+.sb-slider-root .sb-slide-1 .sb-floating-element:nth-child(3) {
+    top: 45%;
+    left: 15%;
+    animation-delay: 2s;
+    font-size: 44px;
+}
+
+@keyframes sb-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .sb-slider-root .sb-slide-1 {
+        padding: 0 50px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-content-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-text-content {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .sb-slider-root .sb-slide-1 h1 {
+        font-size: 52px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-product-image {
+        width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sb-slider-root .sb-slide-1 {
+        padding: 0 30px;
+    }
+
+    .sb-slider-root .sb-slide-1 h1 {
+        font-size: 38px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-subtitle {
+        font-size: 18px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-badge {
+        font-size: 12px;
+        padding: 10px 20px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-feature-item {
+        font-size: 14px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-product-image {
+        width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sb-slider-root .sb-slide-1 {
+        padding: 0 20px;
+    }
+
+    .sb-slider-root .sb-slide-1 h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-subtitle {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-badge {
+        font-size: 10px;
+        padding: 8px 16px;
+        margin-bottom: 20px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-features-list {
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-feature-item {
+        font-size: 13px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-product-image {
+        width: 280px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-floating-element {
+        font-size: 32px;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .sb-slider-root .sb-slide-1 h1 {
+        font-size: 28px;
+    }
+
+    .sb-slider-root .sb-slide-1 .sb-product-image {
+        width: 250px;
+    }
+}

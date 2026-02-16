@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sposób na Milion - Slider</title>
+
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="css/slider-core.css">
+
+    <!-- Per-Slide Styles -->
+    <link rel="stylesheet" href="css/slides/slide-01-product.css">
+    <link rel="stylesheet" href="css/slides/slide-02-congress.css">
+    <link rel="stylesheet" href="css/slides/slide-03-video.css">
+    <link rel="stylesheet" href="css/slides/slide-04-book.css">
+    <link rel="stylesheet" href="css/slides/slide-05-social.css">
+    <link rel="stylesheet" href="css/slides/slide-06-gate.css">
+
+    <!-- Core JS (defines SBSlider namespace) -->
+    <script src="js/slider-core.js" defer></script>
+
+    <!-- Per-Slide JS (register initializers) -->
+    <script src="js/slides/slide-01-product.js" defer></script>
+    <script src="js/slides/slide-02-congress.js" defer></script>
+    <script src="js/slides/slide-03-video.js" defer></script>
+    <script src="js/slides/slide-06-gate.js" defer></script>
+
+    <style>
+        /*
+         * Page-level style: prevents scrolling when slider is fullscreen.
+         * Remove or adjust if embedding the slider inside a larger page.
+         */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         SLIDER ROOT
+         All slider content lives inside .sb-slider-root
+         to isolate styles from any external CSS.
+         ============================================ -->
+    <div class="sb-slider-root">
+
+        <!-- Slides are loaded dynamically from /slides/ -->
+        <div id="sb-slides-container"></div>
+
+        <!-- Navigation: Arrows -->
+        <div class="sb-slider-arrow sb-prev" id="sb-prev-slide"></div>
+        <div class="sb-slider-arrow sb-next" id="sb-next-slide"></div>
+
+        <!-- Navigation: Dots -->
+        <div class="sb-slider-nav">
+            <button class="sb-active" data-slide="0"></button>
+            <button data-slide="1"></button>
+            <button data-slide="2"></button>
+            <button data-slide="3"></button>
+            <button data-slide="4"></button>
+            <button data-slide="5"></button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Load slide HTML fragments and initialize slider.
+         * Requires HTTP server (e.g. Live Server) — fetch() does not
+         * work with file:// protocol.
+         */
+        document.addEventListener('DOMContentLoaded', function () {
+            var slideFiles = [
+                'slides/slide-01-product.html',
+                'slides/slide-02-congress.html',
+                'slides/slide-03-video.html',
+                'slides/slide-04-book.html',
+                'slides/slide-05-social.html',
+                'slides/slide-06-gate.html'
+            ];
+
+            var container = document.getElementById('sb-slides-container');
+
+            Promise.all(
+                slideFiles.map(function (file) {
+                    return fetch(file).then(function (res) { return res.text(); });
+                })
+            ).then(function (htmlFragments) {
+                /* Insert all slides in order */
+                for (var i = 0; i < htmlFragments.length; i++) {
+                    container.insertAdjacentHTML('beforeend', htmlFragments[i]);
+                }
+
+                /* Initialize slider after all slides are in the DOM */
+                if (window.SBSlider && typeof SBSlider.init === 'function') {
+                    SBSlider.init();
+                }
+            }).catch(function (err) {
+                console.error('SBSlider: Failed to load slides', err);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+/* ============================================
+   SLIDER CORE - Shared Styles
+   Namespace: sb- (Slider Brand)
+   All selectors scoped under .sb-slider-root
+   ============================================ */
+
+/* --- Scoped Reset --- */
+.sb-slider-root,
+.sb-slider-root *,
+.sb-slider-root *::before,
+.sb-slider-root *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Root Container --- */
+.sb-slider-root {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Slides Container (needed for slides with position: relative, e.g. slide 6) --- */
+.sb-slider-root #sb-slides-container {
+    position: absolute;
+    inset: 0;
+}
+
+/* --- Slide Base --- */
+.sb-slider-root .sb-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.sb-slider-root .sb-slide.sb-active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+/* --- CTA Button (shared across slides) --- */
+.sb-slider-root .sb-cta-button {
+    display: inline-block;
+    padding: 20px 50px;
+    background: linear-gradient(135deg, #ca9c57 0%, #dab578 100%);
+    color: #1a1a2e;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(202, 156, 87, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    border: none;
+}
+
+.sb-slider-root .sb-cta-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.sb-slider-root .sb-cta-button:hover::after {
+    opacity: 1;
+}
+
+.sb-slider-root .sb-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(202, 156, 87, 0.5);
+}
+
+.sb-slider-root .sb-cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 25px rgba(202, 156, 87, 0.4);
+}
+
+/* --- Highlight Text (shared) --- */
+.sb-slider-root .sb-highlight {
+    color: #ca9c57;
+}
+
+/* --- Navigation: Dot Indicators --- */
+.sb-slider-root .sb-slider-nav {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
+
+.sb-slider-root .sb-slider-nav button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.sb-slider-root .sb-slider-nav button.sb-active {
+    background: #fff;
+    width: 40px;
+    border-radius: 10px;
+}
+
+/* --- Navigation: Arrows --- */
+.sb-slider-root .sb-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.sb-slider-root .sb-slider-arrow.sb-prev {
+    left: 40px;
+}
+
+.sb-slider-root .sb-slider-arrow.sb-next {
+    right: 40px;
+}
+
+.sb-slider-root .sb-slider-arrow::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-top: 3px solid #fff;
+    border-right: 3px solid #fff;
+    transform: rotate(45deg);
+}
+
+.sb-slider-root .sb-slider-arrow.sb-prev::before {
+    transform: rotate(-135deg);
+}
+
+/* ============================================
+   Shared Keyframes
+   (used across multiple slides)
+   ============================================ */
+
+@keyframes sb-slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes sb-slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sb-letterFocusIn {
+    0% {
+        opacity: 0;
+        filter: blur(20px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
+/* ============================================
+   Responsive: Navigation
+   ============================================ */
+
+@media (max-width: 768px) {
+    .sb-slider-root .sb-cta-button {
+        padding: 16px 40px;
+        font-size: 16px;
+    }
+
+    .sb-slider-root .sb-slider-arrow {
+        width: 50px;
+        height: 50px;
+    }
+
+    .sb-slider-root .sb-slider-arrow.sb-prev {
+        left: 20px;
+    }
+
+    .sb-slider-root .sb-slider-arrow.sb-next {
+        right: 20px;
+    }
+
+    .sb-slider-root .sb-slider-nav {
+        bottom: 30px;
+    }
+
+    .sb-slider-root .sb-slider-nav button {
+        width: 10px;
+        height: 10px;
+    }
+
+    .sb-slider-root .sb-slider-nav button.sb-active {
+        width: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sb-slider-root .sb-cta-button {
+        padding: 14px 35px;
+        font-size: 14px;
+    }
+
+    .sb-slider-root .sb-slider-arrow {
+        width: 45px;
+        height: 45px;
+    }
+
+    .sb-slider-root .sb-slider-arrow::before {
+        width: 10px;
+        height: 10px;
+        border-width: 2px;
+    }
+
+    .sb-slider-root .sb-slider-arrow.sb-prev {
+        left: 15px;
+    }
+
+    .sb-slider-root .sb-slider-arrow.sb-next {
+        right: 15px;
+    }
+
+    .sb-slider-root .sb-slider-nav {
+        bottom: 20px;
+        gap: 10px;
+    }
+
+    .sb-slider-root .sb-slider-nav button {
+        width: 8px;
+        height: 8px;
+    }
+
+    .sb-slider-root .sb-slider-nav button.sb-active {
+        width: 25px;
+    }
+}

@@ -1,0 +1,168 @@
+/* ============================================
+   SLIDE 04 - BOOK
+   Zostań współautorem książki
+   ============================================ */
+
+.sb-slider-root .sb-slide-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 80px;
+    overflow: hidden;
+}
+
+/* --- Animated Background --- */
+.sb-slider-root .sb-slide-4 .sb-book-bg {
+    position: absolute;
+    inset: -10%;
+    background-image: url('https://lekcjewartemiliony.pl/wp-content/uploads/2025/05/slider-ksiazka.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.sb-slider-root .sb-slide-4.sb-active .sb-book-bg {
+    animation: sb-diagonalZoom 20s ease-in-out infinite;
+}
+
+@keyframes sb-diagonalZoom {
+    0%, 100% {
+        transform: scale(1.1) translate(0, 0);
+    }
+    25% {
+        transform: scale(1.15) translate(-2%, -2%);
+    }
+    50% {
+        transform: scale(1.2) translate(2%, 2%);
+    }
+    75% {
+        transform: scale(1.15) translate(-1%, 1%);
+    }
+}
+
+/* --- Animated Gradient Overlay --- */
+.sb-slider-root .sb-slide-4::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(202, 156, 87, 0.25) 0%,
+        rgba(0,0,0,0.5) 25%,
+        rgba(0,0,0,0.3) 50%,
+        rgba(0,0,0,0.5) 75%,
+        rgba(202, 156, 87, 0.25) 100%);
+    background-size: 200% 200%;
+    z-index: 1;
+}
+
+.sb-slider-root .sb-slide-4.sb-active::before {
+    animation: sb-gradientShift 15s ease infinite;
+}
+
+@keyframes sb-gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* --- Content --- */
+.sb-slider-root .sb-slide-4 .sb-content-wrapper-centered {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    max-width: 1000px;
+}
+
+.sb-slider-root .sb-slide-4 h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0 0 40px 0;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 30px rgba(0,0,0,0.8);
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.sb-slider-root .sb-slide-4.sb-active h2 {
+    animation: sb-slideUpFadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s forwards;
+}
+
+.sb-slider-root .sb-slide-4 .sb-book-description {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 auto 50px auto;
+    color: #fff;
+    opacity: 0;
+    max-width: 800px;
+    transform: translateY(30px);
+}
+
+.sb-slider-root .sb-slide-4.sb-active .sb-book-description {
+    animation: sb-slideUpFadeIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.6s forwards;
+}
+
+.sb-slider-root .sb-slide-4 .sb-cta-button {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+}
+
+.sb-slider-root .sb-slide-4.sb-active .sb-cta-button {
+    animation: sb-buttonPopIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s forwards;
+}
+
+@keyframes sb-buttonPopIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .sb-slider-root .sb-slide-4 h2 {
+        font-size: 58px;
+    }
+
+    .sb-slider-root .sb-slide-4 .sb-book-description {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sb-slider-root .sb-slide-4 h2 {
+        font-size: 44px;
+    }
+
+    .sb-slider-root .sb-slide-4 .sb-book-description {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sb-slider-root .sb-slide-4 h2 {
+        font-size: 36px;
+    }
+
+    .sb-slider-root .sb-slide-4 .sb-book-description {
+        font-size: 16px;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .sb-slider-root .sb-slide-4 h2 {
+        font-size: 28px;
+    }
+}
