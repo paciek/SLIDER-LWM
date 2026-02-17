@@ -59,7 +59,7 @@ class LWM_Hero_Slider_Shortcode {
          */
         ?>
 <style id="lwm-hero-slider-critical">
-.lwm-hero-slider-root{position:relative;width:100%;height:calc(100vh - var(--lwm-hero-header-offset,0px));height:calc(100dvh - var(--lwm-hero-header-offset,0px) - env(safe-area-inset-bottom,0px));overflow:hidden;background:#000;--lwm-hero-header-offset:0px}
+.lwm-hero-slider-root{position:relative;width:100%;height:calc(100vh - var(--lwm-hero-header-height,0px));height:var(--lwm-hero-available-height,calc(100dvh - var(--lwm-hero-header-height,0px) - env(safe-area-inset-bottom,0px)));overflow:hidden;background:#000;--lwm-hero-header-height:0px}
 .lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slide,
 .lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slider-arrow,
 .lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slider-nav{opacity:0!important;pointer-events:none!important}
@@ -124,7 +124,7 @@ class LWM_Hero_Slider_Shortcode {
 
         /* Inline style (forced header offset only) */
         $inline_style = $has_forced_offset
-            ? sprintf( '--lwm-hero-header-offset:%dpx', absint( $atts['header_offset'] ) )
+            ? sprintf( '--lwm-hero-header-height:%dpx', absint( $atts['header_offset'] ) )
             : '';
 
         /* Wrapper ID */

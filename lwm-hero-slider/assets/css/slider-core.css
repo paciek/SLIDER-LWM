@@ -110,15 +110,15 @@
 .lwm-hero-slider-root {
     position: relative;
     width: 100%;
-    height: calc(100vh - var(--lwm-hero-header-offset, 0px));
-    height: calc(100dvh - var(--lwm-hero-header-offset, 0px) - env(safe-area-inset-bottom, 0px));
+    height: calc(100vh - var(--lwm-hero-header-height, 0px));
+    height: var(--lwm-hero-available-height, calc(100dvh - var(--lwm-hero-header-height, 0px) - env(safe-area-inset-bottom, 0px)));
     overflow: hidden;
     font-family: 'Arial', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: #fff;
     background: #000;
-    --lwm-hero-header-offset: 0px;
+    --lwm-hero-header-height: 0px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

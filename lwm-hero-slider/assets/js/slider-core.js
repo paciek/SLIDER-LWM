@@ -259,48 +259,76 @@
                 resetAutoplay();
             }
 
-            /* ── Header offset: position below site header ─
+            /* ── Dynamic layout: position below site header ──
              *
-             * Algorithm:
-             *   1. If opts.headerOffset is set → use that value.
-             *   2. Otherwise detect #masthead + #wpadminbar heights.
-             *   3. Set CSS variable --lwm-hero-header-offset on root.
-             *   4. CSS applies:
-             *        height: calc(100dvh - var(--lwm-hero-header-offset))
-             *      so the slider fills exactly viewport − header.
-             *   5. Recalculate on resize + orientationchange.
+             * CSS variables set on the slider root:
+             *   --lwm-hero-header-height     #masthead + #wpadminbar
+             *   --lwm-hero-viewport-height   visual viewport height
+             *   --lwm-hero-available-height   viewport − header
+             *
+             * Observers:
+             *   ResizeObserver  → #masthead / #wpadminbar size changes
+             *   visualViewport  → mobile chrome, orientation, address bar
+             *   window resize   → desktop resize, devtools
+             *
+             * Single RAF per frame prevents layout thrashing.
              */
 
-            var resizeTimer;
+            var mastheadEl = document.getElementById('masthead');
+            var adminbarEl = document.getElementById('wpadminbar');
+            var rafId      = 0;
 
-            function updateHeaderOffset() {
-                /* Forced value from shortcode attribute */
+            function updateLayout() {
+                rafId = 0;
+
+                /* ── Read phase (all layout queries) ── */
+                var headerH;
                 if (typeof opts.headerOffset === 'number' && opts.headerOffset > 0) {
-                    root.style.setProperty('--lwm-hero-header-offset', opts.headerOffset + 'px');
-                    return;
+                    headerH = opts.headerOffset;
+                } else {
+                    headerH = 0;
+                    if (mastheadEl) headerH += mastheadEl.getBoundingClientRect().height;
+                    if (adminbarEl) headerH += adminbarEl.getBoundingClientRect().height;
                 }
 
-                /* Auto-detect */
-                var offset   = 0;
-                var masthead = document.getElementById('masthead');
-                var adminbar = document.getElementById('wpadminbar');
+                var viewportH = window.visualViewport
+                    ? window.visualViewport.height
+                    : window.innerHeight;
 
-                if (masthead) offset += masthead.getBoundingClientRect().height;
-                if (adminbar) offset += adminbar.getBoundingClientRect().height;
+                headerH   = Math.round(headerH);
+                viewportH = Math.round(viewportH);
+                var availH = Math.max(0, viewportH - headerH);
 
-                root.style.setProperty('--lwm-hero-header-offset', Math.round(offset) + 'px');
+                /* ── Write phase (batch all style updates) ── */
+                var s = root.style;
+                s.setProperty('--lwm-hero-header-height',    headerH   + 'px');
+                s.setProperty('--lwm-hero-viewport-height',  viewportH + 'px');
+                s.setProperty('--lwm-hero-available-height', availH    + 'px');
             }
 
-            updateHeaderOffset();
+            function scheduleUpdate() {
+                if (!rafId) {
+                    rafId = requestAnimationFrame(updateLayout);
+                }
+            }
 
-            window.addEventListener('resize', function () {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(updateHeaderOffset, 150);
-            });
+            /* Initial measurement */
+            updateLayout();
 
-            window.addEventListener('orientationchange', function () {
-                setTimeout(updateHeaderOffset, 200);
-            });
+            /* ResizeObserver: header element size changes */
+            if (typeof ResizeObserver !== 'undefined') {
+                var headerObserver = new ResizeObserver(scheduleUpdate);
+                if (mastheadEl) headerObserver.observe(mastheadEl);
+                if (adminbarEl) headerObserver.observe(adminbarEl);
+            }
+
+            /* visualViewport: mobile chrome / orientation / address bar */
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', scheduleUpdate);
+            }
+
+            /* window resize: desktop / devtools fallback */
+            window.addEventListener('resize', scheduleUpdate);
         }
     };
 
