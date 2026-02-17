@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
                 <div class="lwm-hero-feature-item">Konkretne kroki, które możesz wdrożyć już dziś</div>
                 <div class="lwm-hero-feature-item">Bez kapitału początkowego</div>
             </div>
-            <a href="<?php echo esc_url( 'https://lekcjewartemiliony.pl/courses/jak-stworzyc-firme-bez-kapitalu-1?ref=sposob-na-milion' ); ?>" class="lwm-hero-cta-button">Zaczynam budować firmę</a>
+            <a href="<?php echo esc_url( 'https://lekcjewartemiliony.pl/jak-stworzyc-firme-bez-kapitalu-mikrokurs/' ); ?>" class="lwm-hero-cta-button">Zaczynam budować firmę</a>
         </div>
         <div class="lwm-hero-product-container">
             <div class="lwm-hero-floating-element"></div>
