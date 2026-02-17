@@ -259,30 +259,21 @@
                 resetAutoplay();
             }
 
-            /* ── Header offset compensation ─────────── *
-             *
-             * Desktop only (≥1025 px).
+            /* ── Header offset: position below site header ─
              *
              * Algorithm:
              *   1. If opts.headerOffset is set → use that value.
              *   2. Otherwise detect #masthead + #wpadminbar heights.
              *   3. Set CSS variable --lwm-hero-header-offset on root.
-             *   4. Critical CSS applies:
-             *        margin-top: calc(-1 * var(--lwm-hero-header-offset))
-             *      which pulls the slider up behind the header.
-             *   5. Recalculate on window resize (debounced).
+             *   4. CSS applies:
+             *        height: calc(100dvh - var(--lwm-hero-header-offset))
+             *      so the slider fills exactly viewport − header.
+             *   5. Recalculate on resize + orientationchange.
              */
 
             var resizeTimer;
 
             function updateHeaderOffset() {
-                var isDesktop = window.matchMedia('(min-width: 1025px)').matches;
-
-                if (!isDesktop) {
-                    root.style.setProperty('--lwm-hero-header-offset', '0px');
-                    return;
-                }
-
                 /* Forced value from shortcode attribute */
                 if (typeof opts.headerOffset === 'number' && opts.headerOffset > 0) {
                     root.style.setProperty('--lwm-hero-header-offset', opts.headerOffset + 'px');
@@ -297,7 +288,7 @@
                 if (masthead) offset += masthead.getBoundingClientRect().height;
                 if (adminbar) offset += adminbar.getBoundingClientRect().height;
 
-                root.style.setProperty('--lwm-hero-header-offset', offset + 'px');
+                root.style.setProperty('--lwm-hero-header-offset', Math.round(offset) + 'px');
             }
 
             updateHeaderOffset();
@@ -305,6 +296,10 @@
             window.addEventListener('resize', function () {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(updateHeaderOffset, 150);
+            });
+
+            window.addEventListener('orientationchange', function () {
+                setTimeout(updateHeaderOffset, 200);
             });
         }
     };

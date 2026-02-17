@@ -59,7 +59,7 @@ class LWM_Hero_Slider_Shortcode {
          */
         ?>
 <style id="lwm-hero-slider-critical">
-.lwm-hero-slider-root{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#000;--lwm-hero-header-offset:0px}
+.lwm-hero-slider-root{position:relative;width:100%;height:calc(100vh - var(--lwm-hero-header-offset,0px));height:calc(100dvh - var(--lwm-hero-header-offset,0px) - env(safe-area-inset-bottom,0px));overflow:hidden;background:#000;--lwm-hero-header-offset:0px}
 .lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slide,
 .lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slider-arrow,
 .lwm-hero-slider-root:not(.lwm-hero-ready) .lwm-hero-slider-nav{opacity:0!important;pointer-events:none!important}
@@ -67,7 +67,6 @@ class LWM_Hero_Slider_Shortcode {
 .lwm-hero-slider-root.lwm-hero-ready .lwm-hero-loader{opacity:0;pointer-events:none}
 .lwm-hero-loader__spinner{width:48px;height:48px;border:3px solid rgba(202,156,87,.2);border-top-color:#ca9c57;border-radius:50%;animation:lwm-hero-spin .8s linear infinite;box-sizing:border-box}
 @keyframes lwm-hero-spin{to{transform:rotate(360deg)}}
-@media(min-width:1025px){.lwm-hero-slider-root{margin-top:calc(-1 * var(--lwm-hero-header-offset))}}
 </style>
         <?php
     }

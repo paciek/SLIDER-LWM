@@ -110,8 +110,8 @@
 .lwm-hero-slider-root {
     position: relative;
     width: 100%;
-    height: 100vh;
-    height: 100dvh;    /* Modern browsers: excludes mobile address bar */
+    height: calc(100vh - var(--lwm-hero-header-offset, 0px));
+    height: calc(100dvh - var(--lwm-hero-header-offset, 0px) - env(safe-area-inset-bottom, 0px));
     overflow: hidden;
     font-family: 'Arial', sans-serif;
     font-size: 16px;
@@ -121,18 +121,6 @@
     --lwm-hero-header-offset: 0px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-/* ─── Header offset (desktop only) ─────────── *
- * --lwm-hero-header-offset is set by JS (auto-detect
- * or forced via shortcode attribute).
- * Pulls the slider up behind the site header
- * so it acts as a full-bleed hero.              */
-
-@media (min-width: 1025px) {
-    .lwm-hero-slider-root {
-        margin-top: calc(-1 * var(--lwm-hero-header-offset));
-    }
 }
 
 /* ─── Slide Base ───────────────────────────── */
